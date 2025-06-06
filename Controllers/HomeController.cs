@@ -64,15 +64,22 @@ return RedirectToAction("Index");
 // /// </summary>
 // /// <param name="id"> المهمة معرف>/param>
 // /// <param name="newTitle">الجديد العنوان>/param>
+// /// <summary>
+// .تعديل عنوان المهمة ///
+// /// </summary>
 [HttpPost]
 public IActionResult EditTask(int id, string newTitle)
 {
-// id ابحث عن المهمة باستخدام :TODO //
-// غير فارغ newTitle تأكد من أن المهمة موجودة وأن :TODO //
-// عدّل عنوان المهمة :TODO //
-return RedirectToAction("Index");   
- }
+    var task = tasks.FirstOrDefault(t => t.Id == id);
 
+    if (task != null && !string.IsNullOrWhiteSpace(newTitle))
+    {
+        task.Title = newTitle.Trim();   
+    }
+
+    
+    return RedirectToAction("Index");
+}
 
 
 
